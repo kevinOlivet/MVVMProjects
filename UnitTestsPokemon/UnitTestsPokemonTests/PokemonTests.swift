@@ -17,7 +17,7 @@ class PokemonTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
-    
+    //given
     squirtle = PokemonViewModel(name: "Squirtle", type: .water, attackType: .water)
     charmander = PokemonViewModel(name: "Charmander", type: .fire, attackType: .fire)
     psyduck = PokemonViewModel(name: "Psyduck", type: .water, attackType: .water)
@@ -32,18 +32,20 @@ class PokemonTests: XCTestCase {
   }
   
   func testThatAWaterPokemonDoesMoreDamageToAFirePokemon() {
+    //when
     // Have Squirtle attack Charmander
     squirtle.attack(enemy: charmander)
     
     // Have Squirtle attack Psyduck
     squirtle.attack(enemy: psyduck)
     
+    //verify
     // If a water Pokemon does more damage to a fire Pokemon Charmander should have less health than Psyduck
     XCTAssertTrue(charmander.health < psyduck.health)
   }
 
   func testExactDamageDoneFromWaterToFirePokemon() {
-    
+    //when
     // Water attack fire = health 100 - 60
     squirtle.attack(enemy: charmander)
     
@@ -53,10 +55,10 @@ class PokemonTests: XCTestCase {
     // Water attack fire = health 100 - 10
     charmander.attack(enemy: squirtle)
     
-    //Charmander should have health 40, Psyduck health 70, Squirtle health 90
-    XCTAssertEqual(charmander.health, 40)
-    XCTAssertEqual(psyduck.health, 70)
-    XCTAssertEqual(squirtle.health, 90)
+    //verify
+    XCTAssertEqual(charmander.health, 40, "Charmander should have health 40")
+    XCTAssertEqual(psyduck.health, 70, "Psyduck should have health 70")
+    XCTAssertEqual(squirtle.health, 90, "Squirtle should have health 90")
 
   }
   
